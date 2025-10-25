@@ -1,490 +1,809 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>NuMeAi — Scale Your Expertise With AI | Digital Twin Platform</title>
-  <meta name="description" content="Create your AI twin in 5 minutes. Join 1,000+ coaches and creators who use NuMeAi to scale their expertise, generate passive income, and help more clients 24/7." />
-
-  <!-- Canonical & SEO -->
-  <link rel="canonical" href="https://numeai.ai/" />
-  <meta name="robots" content="index,follow" />
-
-  <!-- Open Graph / Social -->
-  <meta property="og:title" content="NuMeAi — Scale Your Expertise With AI" />
-  <meta property="og:description" content="Create your AI twin in 5 minutes. Join 1,000+ coaches and creators who use NuMeAi to scale their expertise, generate passive income, and help more clients 24/7." />
-  <meta property="og:url" content="https://numeai.ai/" />
-  <meta property="og:type" content="website" />
-  <!-- Replace with a hosted hero image if you have one -->
-  <meta property="og:image" content="https://numeai.ai/numaai-social.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Favicon (replace if you have a custom one) -->
-  <link rel="icon" href="/favicon.ico" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    :root{
-      --primary-coral:#F4A89B;
-      --primary-peach:#F5B89F;
-      --primary-teal:#9CC5C4;
-      --primary-mint:#A8D5D3;
-      --dark:#0f172a;
-      --gray:#64748b;
-      --light-gray:#f1f5f9;
-      --white:#ffffff;
-    }
-    body{
-      font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Ubuntu,'Helvetica Neue',sans-serif;
-      line-height:1.6;
-      color:var(--dark);
-      background:var(--white);
-      overflow-x:hidden;
-    }
-    .container{ max-width:1280px; margin:0 auto; padding:0 24px; }
-
-    /* Header */
-    header{
-      position:fixed; inset:auto 0 0 0; top:0; z-index:1000;
-      background:rgba(255,255,255,.8);
-      backdrop-filter:blur(20px);
-      border-bottom:1px solid rgba(0,0,0,.05);
-      transition:box-shadow .3s;
-    }
-    header.scrolled{ box-shadow:0 4px 30px rgba(0,0,0,.05); }
-    .nav-content{ display:flex; justify-content:space-between; align-items:center; padding:18px 0; }
-    .logo-image{ height:40px; width:auto; transition:transform .3s; }
-    .logo-image:hover{ transform:scale(1.05); }
-    .nav-links{ display:flex; gap:24px; align-items:center; }
-    .nav-links a{ color:var(--dark); text-decoration:none; font-weight:600; font-size:14px; opacity:.9; }
-    .nav-links a:hover{ color:var(--primary-coral); }
-
-    .btn{
-      padding:12px 20px; border-radius:10px; text-decoration:none; font-weight:700;
-      transition:all .25s; cursor:pointer; border:none; font-size:14px; display:inline-block;
-    }
-    .btn-primary{
-      background:linear-gradient(135deg,var(--primary-coral) 0%,var(--primary-teal) 100%);
-      color:#fff; box-shadow:0 4px 15px rgba(244,168,155,.3);
-    }
-    .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 8px 25px rgba(244,168,155,.4); }
-    .btn-secondary{ background:#fff; color:var(--primary-coral); border:2px solid var(--primary-coral); }
-    .btn-secondary:hover{ background:var(--primary-coral); color:#fff; }
-
-    /* Hero */
-    .hero{
-      padding:140px 0 100px;
-      background:linear-gradient(135deg,var(--primary-coral) 0%,var(--primary-peach) 25%,var(--primary-mint) 75%,var(--primary-teal) 100%);
-      position:relative; overflow:hidden;
-    }
-    .hero::before{
-      content:''; position:absolute; inset:0;
-      background:
-        radial-gradient(circle at 20% 50%,rgba(255,255,255,.15) 0%,transparent 50%),
-        radial-gradient(circle at 80% 80%,rgba(255,255,255,.15) 0%,transparent 50%);
-    }
-    .hero-content{ position:relative; z-index:1; text-align:center; color:#fff; }
-    .hero-badge{
-      display:inline-block; padding:8px 20px; background:rgba(255,255,255,.25);
-      backdrop-filter:blur(10px); border-radius:50px; font-size:13px; font-weight:800;
-      margin-bottom:18px; border:1px solid rgba(255,255,255,.4);
-    }
-    .hero h1{
-      font-size:56px; font-weight:900; line-height:1.1; margin-bottom:16px; letter-spacing:-.02em;
-      text-shadow:0 2px 20px rgba(0,0,0,.1);
-    }
-    .hero-subtitle{
-      font-size:20px; line-height:1.7; opacity:.95; margin:0 auto 32px; max-width:760px;
-    }
-    .hero-ctas{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:28px; }
-    .trust-indicators{
-      display:flex; gap:32px; justify-content:center; flex-wrap:wrap; margin-top:52px; padding-top:28px;
-      border-top:1px solid rgba(255,255,255,.25);
-    }
-    .trust-item{ display:flex; align-items:center; gap:8px; font-size:14px; opacity:.95; }
-
-    /* Stats */
-    .stats{ background:#fff; padding:60px 0; margin-top:-50px; position:relative; z-index:10; }
-    .stats-grid{
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:36px;
-      background:#fff; padding:36px; border-radius:24px; box-shadow:0 20px 60px rgba(0,0,0,.08);
-    }
-    .stat-item{text-align:center;}
-    .stat-number{
-      font-size:42px; font-weight:900;
-      background:linear-gradient(135deg,var(--primary-coral) 0%,var(--primary-teal) 100%);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:6px;
-    }
-    .stat-label{ color:var(--gray); font-size:14px; font-weight:600; }
-
-    /* Sections shared */
-    .section-header{ text-align:center; max-width:800px; margin:0 auto 70px; }
-    .section-tag{ color:var(--primary-coral); font-weight:900; font-size:12px; text-transform:uppercase; letter-spacing:1.6px; margin-bottom:12px; }
-    .section-title{ font-size:42px; font-weight:900; line-height:1.2; margin-bottom:14px; letter-spacing:-.02em; }
-    .section-description{ font-size:18px; color:var(--gray); line-height:1.7; }
-
-    /* Use cases */
-    .use-cases{ padding:100px 0; background:var(--light-gray); }
-    .use-case-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:28px; }
-    .use-case-card{
-      background:#fff; padding:32px; border-radius:20px; box-shadow:0 4px 20px rgba(0,0,0,.06);
-      transition:all .3s; border:1px solid rgba(0,0,0,.05);
-    }
-    .use-case-card:hover{ transform:translateY(-8px); box-shadow:0 20px 40px rgba(244,168,155,.15); }
-    .use-case-icon{
-      width:56px; height:56px; background:linear-gradient(135deg,var(--primary-coral) 0%,var(--primary-teal) 100%);
-      border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:26px; margin-bottom:18px; color:#fff;
-    }
-    .use-case-card h3{ font-size:22px; font-weight:800; margin-bottom:8px; }
-    .use-case-card p{ color:var(--gray); line-height:1.7; margin-bottom:16px; }
-    .use-case-example{ padding:14px; background:var(--light-gray); border-radius:12px; font-size:14px; color:var(--dark); font-style:italic; border-left:3px solid var(--primary-coral); }
-
-    /* Testimonials */
-    .testimonials{ padding:100px 0; background:#fff; }
-    .testimonial-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:28px; margin-top:64px; }
-    .testimonial-card{
-      background:#fff; padding:32px; border-radius:20px; box-shadow:0 4px 20px rgba(0,0,0,.06); border:1px solid rgba(0,0,0,.05); position:relative;
-    }
-    .quote-icon{ position:absolute; top:20px; right:20px; font-size:40px; opacity:.1;
-      background:linear-gradient(135deg,var(--primary-coral) 0%,var(--primary-teal) 100%);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-    }
-    .stars{ color:#fbbf24; font-size:16px; margin-bottom:12px; }
-    .testimonial-text{ font-size:16px; line-height:1.7; color:var(--dark); margin-bottom:18px; }
-    .testimonial-author{ display:flex; align-items:center; gap:14px; }
-    .author-avatar{
-      width:52px; height:52px; border-radius:50%;
-      background:linear-gradient(135deg,var(--primary-coral) 0%,var(--primary-teal) 100%);
-      display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:18px;
-    }
-    .author-info h4{ font-size:15px; font-weight:800; margin-bottom:2px; }
-    .author-info p{ font-size:13px; color:var(--gray); }
-
-    /* Features */
-    .features{ padding:100px 0; background:var(--dark); color:#fff; }
-    .features .section-description{ color:rgba(255,255,255,.75); }
-    .feature-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:28px; margin-top:64px; }
-    .feature-item{
-      padding:28px; background:rgba(255,255,255,.05); backdrop-filter:blur(8px);
-      border-radius:16px; border:1px solid rgba(255,255,255,.1); transition:all .3s;
-    }
-    .feature-item:hover{ background:rgba(255,255,255,.08); transform:translateY(-4px); border-color:var(--primary-coral); }
-    .feature-icon{ font-size:30px; margin-bottom:14px; }
-    .feature-item h3{ font-size:18px; margin-bottom:8px; font-weight:800; }
-    .feature-item p{ color:rgba(255,255,255,.8); line-height:1.6; }
-
-    /* Pricing */
-    .pricing{ padding:100px 0; background:#fff; }
-    .pricing-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:28px; margin-top:64px; }
-    .pricing-card{
-      background:#fff; padding:40px; border-radius:24px; border:2px solid rgba(0,0,0,.08); transition:all .3s; position:relative;
-    }
-    .pricing-card:hover{ transform:translateY(-6px); box-shadow:0 20px 60px rgba(0,0,0,.12); }
-    .pricing-card.popular{ border:2px solid var(--primary-coral); box-shadow:0 20px 60px rgba(244,168,155,.15); }
-    .popular-badge{
-      position:absolute; top:-14px; left:50%; transform:translateX(-50%);
-      background:linear-gradient(135deg,var(--primary-coral) 0%,var(--primary-teal) 100%);
-      color:#fff; padding:6px 18px; border-radius:50px; font-size:12px; font-weight:900; letter-spacing:.4px;
-    }
-    .pricing-card h3{ font-size:20px; margin-bottom:8px; }
-    .pricing-description{ color:var(--gray); font-size:14px; margin-bottom:18px; }
-    .price{ font-size:48px; font-weight:900; color:var(--dark); margin:18px 0; }
-    .price span{ font-size:16px; font-weight:600; color:var(--gray); }
-    .pricing-features{ list-style:none; margin:26px 0; }
-    .pricing-features li{ padding:10px 0; color:var(--dark); display:flex; align-items:flex-start; gap:10px; font-size:14px; }
-    .pricing-features li:before{ content:"✓"; color:#10b981; font-weight:900; font-size:18px; flex-shrink:0; }
-
-    /* CTA */
-    .cta-section{
-      padding:100px 0;
-      background:linear-gradient(135deg,var(--primary-coral) 0%,var(--primary-peach) 25%,var(--primary-mint) 75%,var(--primary-teal) 100%);
-      color:#fff; text-align:center; position:relative; overflow:hidden;
-    }
-    .cta-section::before{
-      content:''; position:absolute; inset:0;
-      background:
-        radial-gradient(circle at 20% 50%,rgba(255,255,255,.15) 0%,transparent 50%),
-        radial-gradient(circle at 80% 80%,rgba(255,255,255,.15) 0%,transparent 50%);
-    }
-    .cta-content{ position:relative; z-index:1; max-width:800px; margin:0 auto; }
-    .cta-section h2{ font-size:42px; font-weight:900; margin-bottom:16px; line-height:1.2; }
-    .cta-section p{ font-size:18px; opacity:.95; margin-bottom:28px; }
-
-    /* Footer */
-    footer{ padding:60px 0; background:var(--dark); color:rgba(255,255,255,.75); }
-    .footer-content{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:36px; margin-bottom:36px; }
-    .footer-section h4{ color:#fff; font-size:14px; font-weight:800; margin-bottom:10px; }
-    .footer-section a{ display:block; color:rgba(255,255,255,.75); text-decoration:none; margin-bottom:8px; font-size:13px; transition:color .2s; }
-    .footer-section a:hover{ color:#fff; }
-    .footer-bottom{ padding-top:24px; border-top:1px solid rgba(255,255,255,.1); text-align:center; font-size:13px; }
-
-    /* Mobile */
-    @media (max-width:768px){
-      .nav-links{ display:none; }
-      .hero h1{ font-size:40px; }
-      .hero-subtitle{ font-size:18px; }
-      .section-title{ font-size:32px; }
-      .price{ font-size:40px; }
-      .use-case-grid,.testimonial-grid,.feature-grid,.pricing-grid{ grid-template-columns:1fr; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NuMeAi - Scale Your Expertise With AI | Digital Twin Platform</title>
+    <meta name="description" content="Create your AI twin in 5 minutes. Join 1,000+ coaches and creators who use NuMeAi to scale their expertise, generate passive income, and help more clients 24/7.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-coral: #F4A89B;
+            --primary-peach: #F5B89F;
+            --primary-teal: #9CC5C4;
+            --primary-mint: #A8D5D3;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        header.scrolled {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        
+        .logo-image {
+            height: 48px;
+            width: auto;
+            transition: transform 0.3s;
+        }
+        
+        .logo-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-coral);
+        }
+        
+        .btn {
+            padding: 12px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 15px;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-coral) 0%, var(--primary-teal) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(244, 168, 155, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(244, 168, 155, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary-coral);
+            border: 2px solid var(--primary-coral);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-coral);
+            color: white;
+        }
+        
+        .hero {
+            padding: 140px 0 100px;
+            background: linear-gradient(135deg, var(--primary-coral) 0%, var(--primary-peach) 25%, var(--primary-mint) 75%, var(--primary-teal) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.15) 0%, transparent 50%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-subtitle {
+            font-size: 22px;
+            line-height: 1.6;
+            opacity: 0.95;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .trust-indicators {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .stats {
+            background: white;
+            padding: 60px 0;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 48px;
+            background: white;
+            padding: 48px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-coral) 0%, var(--primary-teal) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        .use-cases {
+            padding: 120px 0;
+            background: var(--light-gray);
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+        
+        .section-tag {
+            color: var(--primary-coral);
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-description {
+            font-size: 20px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+        
+        .use-case-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .use-case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(244, 168, 155, 0.15);
+        }
+        
+        .use-case-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-coral) 0%, var(--primary-teal) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 24px;
+        }
+        
+        .use-case-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .use-case-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .use-case-example {
+            padding: 16px;
+            background: var(--light-gray);
+            border-radius: 12px;
+            font-size: 14px;
+            color: var(--dark);
+            font-style: italic;
+            border-left: 3px solid var(--primary-coral);
+        }
+        
+        .testimonials {
+            padding: 120px 0;
+            background: white;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 80px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .quote-icon {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            font-size: 48px;
+            opacity: 0.1;
+            background: linear-gradient(135deg, var(--primary-coral) 0%, var(--primary-teal) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stars {
+            color: #fbbf24;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--dark);
+            margin-bottom: 24px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .author-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-coral) 0%, var(--primary-teal) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+        
+        .author-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .author-info p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .features {
+            padding: 120px 0;
+            background: var(--dark);
+            color: white;
+        }
+        
+        .features .section-tag {
+            color: var(--primary-coral);
+        }
+        
+        .features .section-title {
+            color: white;
+        }
+        
+        .features .section-description {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 80px;
+        }
+        
+        .feature-item {
+            padding: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-4px);
+            border-color: var(--primary-coral);
+        }
+        
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-item h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .feature-item p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+        
+        .pricing {
+            padding: 120px 0;
+            background: white;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-top: 80px;
+        }
+        
+        .pricing-card {
+            background: white;
+            padding: 48px;
+            border-radius: 24px;
+            border: 2px solid rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--primary-coral);
+            box-shadow: 0 20px 60px rgba(244, 168, 155, 0.15);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary-coral) 0%, var(--primary-teal) 100%);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+        
+        .pricing-description {
+            color: var(--gray);
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+        
+        .price {
+            font-size: 56px;
+            font-weight: 800;
+            color: var(--dark);
+            margin: 24px 0;
+        }
+        
+        .price span {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--gray);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 32px 0;
+        }
+        
+        .pricing-features li {
+            padding: 12px 0;
+            color: var(--dark);
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            font-size: 15px;
+        }
+        
+        .pricing-features li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: 800;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .cta-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--primary-coral) 0%, var(--primary-peach) 25%, var(--primary-mint) 75%, var(--primary-teal) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.15) 0%, transparent 50%);
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-section h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        
+        .cta-section p {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-bottom: 40px;
+        }
+        
+        footer {
+            padding: 60px 0;
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        
+        .footer-section h4 {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .footer-section a {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin-bottom: 12px;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .price {
+                font-size: 42px;
+            }
+            
+            .use-case-grid,
+            .testimonial-grid,
+            .feature-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Header -->
-  <header id="header">
-    <div class="container">
-      <div class="nav-content">
-        <div class="logo-container">
-          <!-- Serve this from the same root or replace with a full URL -->
-          <img src="/numaai-logo.png" alt="NuMeAi" class="logo-image" />
+    <header id="header">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo-container">
+                    <img src="/numaai-logo.png" alt="NuMeAi" class="logo-image">
+                </div>
+                <nav class="nav-links">
+                    <a href="#use-cases">Use Cases</a>
+                    <a href="#features">Features</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="https://app.numeai.ai" class="btn btn-primary">Launch App</a>
+                </nav>
+            </div>
         </div>
-        <nav class="nav-links">
-          <a href="#use-cases">Use Cases</a>
-          <a href="#features">Features</a>
-          <a href="#pricing">Pricing</a>
-          <a href="https://app.numeai.ai" class="btn btn-primary">Launch App</a>
-        </nav>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">✨ Trusted by 1,000+ coaches and creators</div>
-        <h1>Scale Your Expertise<br />With Your AI Twin</h1>
-        <p class="hero-subtitle">
-          Join coaches and creators who use NuMeAi to answer client questions 24/7, generate passive income, and help more people — without working more hours.
-        </p>
-        <div class="hero-ctas">
-          <a href="https://app.numeai.ai/?wizard=1" class="btn btn-primary" style="font-size:16px;padding:14px 28px;">Create Your AI Twin (Free)</a>
-          <a href="#use-cases" class="btn btn-secondary" style="font-size:16px;padding:14px 28px;">See How It Works</a>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">✨ Trusted by 1,000+ coaches and creators</div>
+                <h1>Scale Your Expertise<br>With Your AI Twin</h1>
+                <p class="hero-subtitle">Join coaches and creators who use NuMeAi to answer client questions 24/7, generate passive income, and help more people — without working more hours.</p>
+                <div class="hero-ctas">
+                    <a href="https://app.numeai.ai/?wizard=1" class="btn btn-primary" style="font-size: 17px; padding: 16px 36px;">Create Your AI Twin (Free)</a>
+                    <a href="#use-cases" class="btn btn-secondary" style="font-size: 17px; padding: 16px 36px;">See How It Works</a>
+                </div>
+                <div class="trust-indicators">
+                    <div class="trust-item"><span>⚡</span><span>5-minute setup</span></div>
+                    <div class="trust-item"><span>🔒</span><span>Your data stays yours</span></div>
+                    <div class="trust-item"><span>💳</span><span>No credit card required</span></div>
+                </div>
+            </div>
         </div>
-        <div class="trust-indicators">
-          <div class="trust-item"><span>⚡</span><span>5-minute setup</span></div>
-          <div class="trust-item"><span>🔒</span><span>Your data stays yours</span></div>
-          <div class="trust-item"><span>💳</span><span>No credit card required</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Stats -->
-  <section class="stats">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item"><div class="stat-number">5min</div><div class="stat-label">Average setup time</div></div>
-        <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Your AI works nonstop</div></div>
-        <div class="stat-item"><div class="stat-number">22x</div><div class="stat-label">Cheaper than competitors</div></div>
-        <div class="stat-item"><div class="stat-number">$5K+</div><div class="stat-label">Avg monthly passive income</div></div>
-      </div>
-    </div>
-  </section>
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item"><div class="stat-number">5min</div><div class="stat-label">Average setup time</div></div>
+                <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Your AI works nonstop</div></div>
+                <div class="stat-item"><div class="stat-number">22x</div><div class="stat-label">Cheaper than competitors</div></div>
+                <div class="stat-item"><div class="stat-number">$5K+</div><div class="stat-label">Avg monthly passive income</div></div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Use Cases -->
-  <section class="use-cases" id="use-cases">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">Real Results</div>
-        <h2 class="section-title">See How Creators Use NuMeAi</h2>
-        <p class="section-description">From fitness coaches to financial advisors, see how professionals scale their expertise with AI.</p>
-      </div>
-      <div class="use-case-grid">
-        <div class="use-case-card">
-          <div class="use-case-icon">💪</div>
-          <h3>Fitness Coaches</h3>
-          <p>Scale your coaching without sacrificing quality. Your AI answers form check questions, provides meal plans, and keeps clients accountable between sessions.</p>
-          <div class="use-case-example">“My AI coach handles 200+ client questions per week while I focus on in-person training. I added $3K/mo in passive income.” — Sarah M., Fitness Coach</div>
+    <section class="use-cases" id="use-cases">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Real Results</div>
+                <h2 class="section-title">See How Creators Use NuMeAi</h2>
+                <p class="section-description">From fitness coaches to financial advisors, see how professionals scale their expertise with AI</p>
+            </div>
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <div class="use-case-icon">💪</div>
+                    <h3>Fitness Coaches</h3>
+                    <p>Scale your coaching without sacrificing quality. Your AI answers form check questions, provides meal plans, and keeps clients accountable between sessions.</p>
+                    <div class="use-case-example">"My AI coach handles 200+ client questions per week while I focus on in-person training. I added $3K/mo in passive income." — Sarah M., Fitness Coach</div>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🎓</div>
+                    <h3>Course Creators</h3>
+                    <p>Give every student personalized support. Your AI twin answers course questions, explains concepts, and provides feedback 24/7.</p>
+                    <div class="use-case-example">"My students get instant answers instead of waiting days for email responses. Course completion rate up 40%." — Marcus T., Online Educator</div>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">💼</div>
+                    <h3>Business Consultants</h3>
+                    <p>Qualify leads automatically and provide initial consultations at scale. Your AI captures contact info and books discovery calls.</p>
+                    <div class="use-case-example">"I closed 5 new clients last month from leads my AI qualified. It's like having a 24/7 sales assistant." — David R., Business Consultant</div>
+                </div>
+            </div>
         </div>
-        <div class="use-case-card">
-          <div class="use-case-icon">🎓</div>
-          <h3>Course Creators</h3>
-          <p>Give every student personalized support. Your AI twin answers course questions, explains concepts, and provides feedback 24/7.</p>
-          <div class="use-case-example">“My students get instant answers instead of waiting days for email responses. Course completion rate up 40%.” — Marcus T., Online Educator</div>
-        </div>
-        <div class="use-case-card">
-          <div class="use-case-icon">💼</div>
-          <h3>Business Consultants</h3>
-          <p>Qualify leads automatically and provide initial consultations at scale. Your AI captures contact info and books discovery calls.</p>
-          <div class="use-case-example">“I closed 5 new clients last month from leads my AI qualified. It’s like having a 24/7 sales assistant.” — David R., Business Consultant</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Testimonials -->
-  <section class="testimonials">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">Testimonials</div>
-        <h2 class="section-title">Loved by Creators Worldwide</h2>
-        <p class="section-description">See what coaches and creators are saying about NuMeAi.</p>
-      </div>
-      <div class="testimonial-grid">
-        <div class="testimonial-card">
-          <div class="quote-icon">"</div>
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">“NuMeAi changed how I run my coaching business. I answer the same 50 questions every week—now my AI handles them instantly. I focus on high-value calls while my AI does the rest.”</p>
-          <div class="testimonial-author"><div class="author-avatar">JK</div><div class="author-info"><h4>Jessica Kim</h4><p>Life Coach • 10K followers</p></div></div>
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Testimonials</div>
+                <h2 class="section-title">Loved by Creators Worldwide</h2>
+                <p class="section-description">See what coaches and creators are saying about NuMeAi</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="quote-icon">"</div>
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"NuMeAi changed how I run my coaching business. I answer the same 50 questions every week - now my AI handles them instantly. I focus on high-value calls while my AI does the rest."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JK</div>
+                        <div class="author-info"><h4>Jessica Kim</h4><p>Life Coach • 10K followers</p></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon">"</div>
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"I was skeptical at first, but after seeing my AI twin in action, I'm blown away. It sounds like me, answers like me, and my clients love getting instant responses. Game changer."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info"><h4>Michael Rodriguez</h4><p>Financial Advisor • 25K followers</p></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon">"</div>
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Setup took 5 minutes. Within 2 weeks, my AI handled over 300 conversations. I'm making $2K/month in passive income just from people accessing my AI coach. Worth every penny."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AL</div>
+                        <div class="author-info"><h4>Amanda Lee</h4><p>Nutrition Coach • 50K followers</p></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="testimonial-card">
-          <div class="quote-icon">"</div>
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">“I was skeptical at first, but after seeing my AI twin in action, I’m blown away. It sounds like me, answers like me, and my clients love getting instant responses.”</p>
-          <div class="testimonial-author"><div class="author-avatar">MR</div><div class="author-info"><h4>Michael Rodriguez</h4><p>Financial Advisor • 25K followers</p></div></div>
-        </div>
-        <div class="testimonial-card">
-          <div class="quote-icon">"</div>
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">“Setup took 5 minutes. Within 2 weeks, my AI handled over 300 conversations. I’m making $2K/month in passive income just from people accessing my AI coach.”</p>
-          <div class="testimonial-author"><div class="author-avatar">AL</div><div class="author-info"><h4>Amanda Lee</h4><p>Nutrition Coach • 50K followers</p></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Features -->
-  <section class="features" id="features">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">Product</div>
-        <h2 class="section-title" style="color:#fff;">What You Get</h2>
-        <p class="section-description">NuMeAi combines GPT-layer intelligence with your knowledge to create a contextual AI twin that feels like you.</p>
-      </div>
-      <div class="feature-grid">
-        <div class="feature-item">
-          <div class="feature-icon">🧠</div>
-          <h3>Contextual Intelligence</h3>
-          <p>Your twin learns from your answers, links, and uploads—so responses stay on-brand and accurate.</p>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">⚙️</div>
-          <h3>Set-and-Scale</h3>
-          <p>5-minute onboarding, auto-generated questions (plus 3 custom slots), and one-click publishing.</p>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">💬</div>
-          <h3>24/7 Client Support</h3>
-          <p>Answer FAQs, collect leads, and route to paid consults—while you’re offline.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section class="pricing" id="pricing">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag">Plans</div>
-        <h2 class="section-title">Simple, Creator-Friendly Pricing</h2>
-        <p class="section-description">Start free. Upgrade when you’re ready to scale.</p>
-      </div>
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <h3>Free</h3>
-          <p class="pricing-description">Try NuMeAi with one AI twin and core features.</p>
-          <div class="price">$0 <span>/ forever</span></div>
-          <ul class="pricing-features">
-            <li>1 AI twin</li>
-            <li>Core questions (auto + custom)</li>
-            <li>Basic publishing</li>
-          </ul>
-          <a href="https://app.numeai.ai/?wizard=1" class="btn btn-secondary">Get Started</a>
-        </div>
-
-        <div class="pricing-card popular">
-          <div class="popular-badge">Most Popular</div>
-          <h3>Creator</h3>
-          <p class="pricing-description">Scale your twin with more questions and publishing power.</p>
-          <div class="price">$19 <span>/ month</span></div>
-          <ul class="pricing-features">
-            <li>Up to 3 AI twins</li>
-            <li>Expanded questions &amp; custom slots</li>
-            <li>Lead capture + publishing</li>
-          </ul>
-          <a href="https://app.numeai.ai/?wizard=1" class="btn btn-primary">Start Creator</a>
-        </div>
-
-        <div class="pricing-card">
-          <h3>Pro</h3>
-          <p class="pricing-description">For teams and high-volume creators.</p>
-          <div class="price">$49 <span>/ month</span></div>
-          <ul class="pricing-features">
-            <li>Up to 5 AI twins</li>
-            <li>Advanced questions &amp; templates</li>
-            <li>Brandable outputs</li>
-          </ul>
-          <a href="https://app.numeai.ai/?wizard=1" class="btn btn-secondary">Go Pro</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-content">
-        <h2>Turn Your Knowledge Into a 24/7 AI Twin</h2>
-        <p>Launch in minutes. Help more people. Earn while you sleep.</p>
-        <a href="https://app.numeai.ai/?wizard=1" class="btn btn-primary" style="font-size:16px;padding:14px 28px;">Create Your AI Twin (Free)</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h4>NuMeAi</h4>
-          <a href="#use-cases">Use Cases</a>
-          <a href="#features">Features</a>
-          <a href="#pricing">Pricing</a>
-        </div>
-        <div class="footer-section">
-          <h4>Company</h4>
-          <a href="mailto:hello@numeai.ai">Contact</a>
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-        </div>
-        <div class="footer-section">
-          <h4>Launch</h4>
-          <a href="https://app.numeai.ai" class="btn btn-primary" style="padding:10px 14px;">Open App</a>
-        </div>
-      </div>
-      <div class="footer-bottom">© <span id="year"></span> NuMeAi. All rights reserved.</div>
-    </div>
-  </footer>
-
-  <script>
-    // Sticky header shadow
-    const header = document.getElementById('header');
-    const onScroll = () => {
-      if (window.scrollY > 8) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
-    };
-    window.addEventListener('scroll', onScroll);
-    onScroll();
-
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-
-  <!-- Analytics hook (optional):
-  <script defer src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments)}; gtag('js', new Date()); gtag('config', 'G-XXXXXXX');
-  </script>
-  -->
-  <noscript>This site works best with JavaScript enabled.</noscript>
-</body>
-</html>
-
-
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Features</div>
+                <h2 class="section-title">Everything You Need to Scale</h2>
+                <p class="section-description">Powerful features designed for coaches and creators</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-item"><div class="feature-icon">🚀</div><h3>5-Minute Setup</h3><p>Answer 6 simple questions and upload a photo. No technical skills required. Your AI twin is ready to work in minutes.</p></div>
+                <div class="feature-item"><div class="feature-icon">🎯</div><h3>Your Voice, Your Style</h3><p>Your AI learns from your expertise and communication style. It answers questions the way you would, maintaining your unique personality.</p></div>
+                <div class="feature-item"><div class="feature-icon">📊</div><h3>Analytics Dashboard</h3><p>Track conversations, see what questions people ask most, and understand how your AI twin is performing. Make data-driven decisions to improve.</p></div>
+                <div class="feature-item"><div class="feature-icon">💬</div><h3>24/7 Availability</h3><p>Your AI twin never sleeps. Answer client questions at midnight, on weekends, and while you're on vacation. Never miss an opportunity.</p></div>
+                <div class="feature-item"><div class="feature-icon">🔗</div><h3>Share Anywhere</h3><p>Get a unique link to your AI twin. Share it on Instagram, your website, email signature, or anywhere your audience hangs out.</p></div>
+                <div class="feature-item"><div class="feature-icon
